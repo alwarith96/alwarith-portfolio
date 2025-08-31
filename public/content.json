@@ -1,0 +1,22 @@
+{
+  "accent": "#00E5A6",
+  "langDefault": "ar",
+  "hero": {
+    "source": "youtube",
+    "youtubeId": "ZrjQqsffbx0",
+    "overlay": 0.5
+  },
+  "profile": {
+    "name": "Alwarith Almamari",
+    "title": "Filmmaker & Photographer",
+    "email": "hello@altarkiz.example",
+    "bio_ar": "نبذة قصيرة...",
+    "bio_en": "Short bio...",
+    "socials": {
+      "instagram": "https://instagram.com/Alwarith96",
+      "youtube": "https://youtube.com/@AltarkizProduction"
+    }
+  },
+  "projects": [],
+  "clients": []
+}
