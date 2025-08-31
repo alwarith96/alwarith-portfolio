@@ -1,22 +1,55 @@
 {
   "accent": "#00E5A6",
   "langDefault": "ar",
-  "hero": {
-    "source": "youtube",
-    "youtubeId": "ZrjQqsffbx0",
-    "overlay": 0.5
+  "siteType": "company",
+  "company": {
+    "name": "Altarkiz Production",
+    "tagline_ar": "شركة إنتاج محتوى بصري",
+    "tagline_en": "Visual Content Production Studio",
+    "about_ar": "نقدم إنتاج أفلام وتصوير فوتوغرافي للجهات والأفراد...",
+    "about_en": "We produce films and photography for brands and institutions..."
   },
+  "hero": { "source": "youtube", "youtubeId": "ZrjQqsffbx0", "overlay": 0.45 },
   "profile": {
-    "name": "Alwarith Almamari",
-    "title": "Filmmaker & Photographer",
+    "name": "Altarkiz Production",
+    "title": "Visual Content Studio",
     "email": "hello@altarkiz.example",
-    "bio_ar": "نبذة قصيرة...",
-    "bio_en": "Short bio...",
+    "bio_ar": "سطر تعريفي مختصر...",
+    "bio_en": "Short English bio...",
     "socials": {
-      "instagram": "https://instagram.com/Alwarith96",
-      "youtube": "https://youtube.com/@AltarkizProduction"
+      "instagram": "https://instagram.com/YourAccount",
+      "youtube": "https://youtube.com/@YourChannel"
     }
   },
-  "projects": [],
-  "clients": []
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": { "ar": "عنوان مشروع", "en": "Project Title" },
+      "client": "اسم العميل",
+      "year": "2025",
+      "type": "video",
+      "cover": "/covers/p1.jpg",
+      "description": { "ar": "وصف مختصر...", "en": "Short desc..." },
+      "media": { "type": "youtube", "id": "VIDEO_ID" }
+    }
+  ],
+  "clients": [
+    { "name": "UTAS", "logo": "/clients/utas.svg" },
+    { "name": "OCEC", "logo": "/clients/ocec.svg" }
+  ],
+  "team": [
+    {
+      "id": "alwarith",
+      "name": "Alwarith Almamari",
+      "role": { "ar": "المدير التنفيذي / مخرج", "en": "CEO / Director" },
+      "photo": "/team/alwarith.jpg",
+      "bio": { "ar": "نبذة قصيرة عن الخبرة...", "en": "Short bio..." }
+    },
+    {
+      "id": "sara",
+      "name": "Sara A.",
+      "role": { "ar": "منتج", "en": "Producer" },
+      "photo": "/team/sara.jpg"
+    }
+  ]
 }
