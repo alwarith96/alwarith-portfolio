@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 /* ==========================================================
-   Alwarith — Modern Portfolio (Plain React + Inline CSS)
+   Altarkiz — Company Portfolio (Plain React + Inline CSS)
    - لا يحتاج Tailwind أو مكتبات إضافية
-   - المحتوى من /public/content.json
+   - المحتوى من /public/content.json (CMS بسيط بدون كود)
    - هيرو فيديو يوتيوب صامت + تشغيل تلقائي + تكرار
+   - يدعم نمط "شركة" مع قسم "الإدارة" (فريق الإدارة)
    ========================================================== */
 
 type Lang = "ar" | "en";
@@ -26,12 +27,29 @@ type Project = {
 };
 
 type Profile = {
-  name: string;
-  title: string;
+  name: string; // اسم الشركة أو الشخص - يُعرض في الهيدر والفوتر
+  title: string; // سطر قصير تحت الاسم (شعار/وصف)
   email: string;
   bio_ar: string;
   bio_en: string;
   socials: { instagram?: string; youtube?: string };
+};
+
+type Company = {
+  name?: string; // يطغى على profile.name إن وُجد
+  tagline_ar?: string;
+  tagline_en?: string;
+  about_ar?: string;
+  about_en?: string;
+};
+
+type TeamMember = {
+  id: string;
+  name: string;
+  role: { ar: string; en: string };
+  photo?: string; // صورة مربعة يفضل 600x600
+  bio?: { ar?: string; en?: string };
+  links?: { instagram?: string; linkedin?: string; email?: string };
 };
 
 type Hero =
@@ -43,10 +61,13 @@ type Hero =
 type CMSContent = {
   accent?: string;
   langDefault?: Lang;
+  siteType?: "company" | "personal";
+  company?: Company; // لنصوص الشركة والمسميات
   hero?: Hero;
   profile?: Partial<Profile>;
   projects?: Project[];
   clients?: { name: string; logo: string }[];
+  team?: TeamMember[]; // قسم الإدارة
 };
 
 // استخراج ID من روابط اليوتيوب المختلفة
@@ -67,22 +88,32 @@ function extractYouTubeId(input: string): string {
   return input;
 }
 
-// الافتراضيات (تشتغل حتى لو ما عندك content.json)
-const defaultContent: Required<Omit<CMSContent, "profile" | "hero">> & {
+// الافتراضيات — معدلة لوضع الشركة Altarkiz
+const defaultContent: Required<Omit<CMSContent, "profile" | "hero" | "company" | "team">> & {
   profile: Profile;
   hero: Hero;
+  company: Company;
+  team: TeamMember[];
 } = {
   accent: "#00E5A6",
   langDefault: "ar",
+  siteType: "company",
   hero: { source: "youtube", youtubeId: "ZrjQqsffbx0", overlay: 0.45 },
+  company: {
+    name: "Altarkiz Production",
+    tagline_ar: "شركة إنتاج محتوى بصري",
+    tagline_en: "Visual Content Production Studio",
+    about_ar: "نقدّم إنتاج أفلام وإخراج وتصوير فوتوغرافي للأفراد والجهات. نركز على القصص الإنسانية، الرياضة، والثقافة مع تنفيذ احترافي سريع.",
+    about_en: "We produce films and photography for brands and institutions, focusing on human, sport and cultural stories with fast professional delivery."
+  },
   profile: {
-    name: "Alwarith Almamari",
-    title: "Filmmaker & Photographer",
+    name: "Altarkiz Production",
+    title: "Visual Content Studio",
     email: "hello@altarkiz.example",
     bio_ar:
-      "صانع أفلام ومصور مستقل. أركز على القصص الإنسانية، المحتوى الرياضي والثقافي. أغطي فعاليات وطنية وأنتج أفلامًا دعائية ومحتوى منصات التواصل.",
+      "نقدّم إنتاج أفلام وإخراج وتصوير فوتوغرافي للأفراد والجهات. نركز على القصص الإنسانية، الرياضة، والثقافة.",
     bio_en:
-      "Freelance filmmaker & photographer crafting human, sport and cultural stories. Event coverage, brand films, and social-first content.",
+      "We craft brand films and photography with a focus on human, sport and culture.",
     socials: {
       instagram: "https://instagram.com/Alwarith96",
       youtube: "https://youtube.com/@AltarkizProduction"
@@ -117,33 +148,54 @@ const defaultContent: Required<Omit<CMSContent, "profile" | "hero">> & {
     { name: "OCEC", logo: "https://dummyimage.com/200x80/00E5A6/fff&text=OCEC" },
     { name: "Oman Cycling", logo: "https://dummyimage.com/200x80/00E5A6/fff&text=OCF" },
     { name: "F&B Group", logo: "https://dummyimage.com/200x80/00E5A6/fff&text=F%26B" }
+  ],
+  team: [
+    { id: "alwarith", name: "Alwarith Almamari", role: { ar: "المدير التنفيذي / مخرج", en: "CEO / Director" }, photo: "https://dummyimage.com/600x600/111/fff&text=A" },
+    { id: "producer", name: "Sara A.", role: { ar: "منتج", en: "Producer" }, photo: "https://dummyimage.com/600x600/111/fff&text=S" }
   ]
 };
 
 function mergeContent(partial: CMSContent): typeof defaultContent {
   const accent = partial.accent || defaultContent.accent;
   const langDefault = partial.langDefault || defaultContent.langDefault;
+  const siteType = partial.siteType || defaultContent.siteType;
   let hero = partial.hero || defaultContent.hero;
   if (hero && (hero as any).source === "youtube") {
     hero = { ...(hero as any), youtubeId: extractYouTubeId((hero as any).youtubeId) } as Hero;
   }
+  const company: Company = { ...defaultContent.company, ...(partial.company || {}) };
   const profile: Profile = { ...defaultContent.profile, ...(partial.profile || {}) };
   const projects = (partial.projects?.length ? partial.projects : defaultContent.projects).map((p) => ({ ...p }));
   const clients = (partial.clients?.length ? partial.clients : defaultContent.clients).map((c) => ({ ...c }));
-  return { accent, langDefault, hero, profile, projects, clients };
+  const team = (partial.team?.length ? partial.team : defaultContent.team).map((m) => ({ ...m }));
+  return { accent, langDefault, siteType, hero, company, profile, projects, clients, team } as any;
 }
 
-const dictFor = (lang: Lang, profile: Profile) => ({
-  nav: { work: lang === "ar" ? "الأعمال" : "Work", clients: lang === "ar" ? "عملاء" : "Clients", contact: lang === "ar" ? "تواصل" : "Contact" },
-  hero: {
-    kicker: lang === "ar" ? "صانع أفلام · مصور" : "Filmmaker · Photographer",
-    title: lang === "ar" ? "أروي القصة بالصوت والصورة" : "I tell stories with film & photography",
-    desc: lang === "ar" ? profile.bio_ar : profile.bio_en
-  },
-  work: { title: lang === "ar" ? "أعمال مختارة" : "Selected Work", all: lang === "ar" ? "الكل" : "All", video: lang === "ar" ? "فيديو" : "Video", photo: lang === "ar" ? "صور" : "Photo" },
-  clients: { title: lang === "ar" ? "شركاء وثقوا بي" : "Clients & Partners" },
-  contact: { title: lang === "ar" ? "جاهز للتعاون" : "Open for Collaborations", desc: lang === "ar" ? "أرسل رسالة وابدأ مشروعك القادم." : "Drop a line to start your next project." }
-});
+const dictFor = (lang: Lang, profile: Profile, siteType: CMSContent["siteType"], company: Company) => {
+  const heroTitle = siteType === "company"
+    ? (lang === "ar" ? (company.tagline_ar || "شركة إنتاج محتوى بصري") : (company.tagline_en || "Visual Content Production Studio"))
+    : (lang === "ar" ? "أروي القصة بالصوت والصورة" : "I tell stories with film & photography");
+  const heroDesc = siteType === "company"
+    ? (lang === "ar" ? (company.about_ar || profile.bio_ar) : (company.about_en || profile.bio_en))
+    : (lang === "ar" ? profile.bio_ar : profile.bio_en);
+  return {
+    nav: {
+      work: lang === "ar" ? "الأعمال" : "Work",
+      clients: lang === "ar" ? "عملاء" : "Clients",
+      team: lang === "ar" ? "الإدارة" : "Management",
+      contact: lang === "ar" ? "تواصل" : "Contact"
+    },
+    hero: {
+      kicker: siteType === "company" ? (lang === "ar" ? "شركة التركيز" : "Altarkiz Production") : (lang === "ar" ? "صانع أفلام · مصور" : "Filmmaker · Photographer"),
+      title: heroTitle,
+      desc: heroDesc
+    },
+    work: { title: lang === "ar" ? "أعمال مختارة" : "Selected Work", all: lang === "ar" ? "الكل" : "All", video: lang === "ar" ? "فيديو" : "Video", photo: lang === "ar" ? "صور" : "Photo" },
+    clients: { title: lang === "ar" ? "شركاء وثقوا بنا" : "Clients & Partners" },
+    team: { title: lang === "ar" ? "فريق الإدارة" : "Management Team" },
+    contact: { title: lang === "ar" ? "جاهزون للتعاون" : "Open for Collaborations", desc: lang === "ar" ? "أرسل رسالة وابدأ مشروعك القادم." : "Drop a line to start your next project." }
+  };
+};
 
 export default function Portfolio() {
   const [content, setContent] = useState(defaultContent);
@@ -169,9 +221,10 @@ export default function Portfolio() {
     document.documentElement.style.setProperty("--accent", content.accent);
   }, [content.accent]);
 
-  const dict = dictFor(lang, content.profile);
+  const dict = dictFor(lang, content.profile, content.siteType, content.company);
   const projects = content.projects;
   const clients = content.clients;
+  const team = content.team;
   const filtered = useMemo(
     () => (filter === "all" ? projects : projects.filter((p) => p.type === filter)),
     [filter, projects]
@@ -211,6 +264,10 @@ export default function Portfolio() {
         .logos{ display:grid; gap:16px; grid-template-columns:repeat(2,1fr); place-items:center; }
         @media(min-width:800px){ .logos{ grid-template-columns:repeat(4,1fr); } }
         .logos img{ max-height:52px; opacity:.85; filter:grayscale(30%); }
+        .team{ display:grid; gap:16px; grid-template-columns:repeat(1,1fr); }
+        @media(min-width:800px){ .team{ grid-template-columns:repeat(3,1fr); } }
+        .person{ border:1px solid rgba(255,255,255,.1); border-radius:16px; padding:14px; background:#101010; text-align:center; }
+        .person img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:12px; }
         .cta{ position:sticky; bottom:12px; }
         footer{ text-align:center; color:#a1a1a1; padding:32px 0; }
         .nav a{ text-decoration:none; opacity:.9; }
@@ -224,10 +281,11 @@ export default function Portfolio() {
         {/* NAV */}
         <header>
           <div className="max bar">
-            <div style={{ fontWeight: 700 }}>{content.profile.name}</div>
+            <div style={{ fontWeight: 700 }}>{content.company.name || content.profile.name}</div>
             <nav className="nav" style={{ display: "flex", gap: 16, fontSize: 14 }}>
               <a href="#work">{dict.nav.work}</a>
               <a href="#clients">{dict.nav.clients}</a>
+              <a href="#team">{dict.nav.team}</a>
               <a href="#contact">{dict.nav.contact}</a>
             </nav>
             <button className="btn" onClick={() => setLang(lang === "ar" ? "en" : "ar")}>
@@ -328,6 +386,25 @@ export default function Portfolio() {
           </div>
         </section>
 
+        {/* TEAM / MANAGEMENT */}
+        <section id="team" className="section">
+          <div className="max">
+            <h2 className="title">{dict.team.title}</h2>
+            <div className="team">
+              {team.map((m) => (
+                <div key={m.id} className="person">
+                  {m.photo && <img src={m.photo} alt={m.name} />}
+                  <div style={{ fontWeight: 800, marginTop: 10 }}>{m.name}</div>
+                  <div className="muted" style={{ fontSize: 14 }}>{lang === "ar" ? m.role.ar : m.role.en}</div>
+                  {m.bio && (m.bio[lang] || m.bio.ar || m.bio.en) && (
+                    <p className="muted" style={{ fontSize: 13, marginTop: 8 }}>{m.bio[lang as keyof typeof m.bio] || m.bio.ar || m.bio.en}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* CONTACT */}
         <section id="contact" className="cta">
           <div className="max" style={{ marginBottom: 16 }}>
@@ -352,7 +429,7 @@ export default function Portfolio() {
               </div>
               <div style={{ display: "flex", gap: 8 }}>
                 <a href={`mailto:${content.profile.email}`} className="btn btn-accent">
-                  {lang === "ar" ? "راسلني" : "Email me"}
+                  {lang === "ar" ? "راسلنا" : "Email us"}
                 </a>
                 {content.profile.socials.instagram && (
                   <a href={content.profile.socials.instagram} target="_blank" rel="noreferrer" className="btn">
@@ -369,7 +446,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        <footer>© {new Date().getFullYear()} {content.profile.name}</footer>
+        <footer>© {new Date().getFullYear()} {content.company.name || content.profile.name}</footer>
       </div>
 
       {/* LIGHTBOX (بسيط بدون مكتبات) */}
