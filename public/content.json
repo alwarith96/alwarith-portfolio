@@ -32,23 +32,23 @@
       "client": "عميل تجريبي",
       "year": "2025",
       "type": "video",
-      "cover": "https://dummyimage.com/800x450/111/fff&text=Project+Cover",
+      "cover": "/covers/sample.jpg",
       "description": { "ar": "وصف مختصر للمشروع.", "en": "Short description of the project." },
       "media": { "type": "youtube", "id": "dQw4w9WgXcQ" }
     }
   ],
 
   "clients": [
-    { "name": "MCY", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=MCY" },
-    { "name": "OCEC", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=OCEC" },
-    { "name": "WORK", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=WORK" },
-    { "name": "CLIENT4", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C4" },
-    { "name": "CLIENT5", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C5" },
-    { "name": "CLIENT6", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C6" },
-    { "name": "CLIENT7", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C7" },
-    { "name": "CLIENT8", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C8" },
-    { "name": "CLIENT9", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C9" },
-    { "name": "CLIENT10", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C10" }
+    { "name": "MCY", "logo": "/clients/mcy.png" },
+    { "name": "OCEC", "logo": "/clients/ocec.svg" },
+    { "name": "WORK", "logo": "/clients/work.svg" },
+    { "name": "CLIENT4", "logo": "/clients/client4.png" },
+    { "name": "CLIENT5", "logo": "/clients/client5.png" },
+    { "name": "CLIENT6", "logo": "/clients/client6.png" },
+    { "name": "CLIENT7", "logo": "/clients/client7.png" },
+    { "name": "CLIENT8", "logo": "/clients/client8.png" },
+    { "name": "CLIENT9", "logo": "/clients/client9.png" },
+    { "name": "CLIENT10", "logo": "/clients/client10.png" }
   ],
 
   "team": [
@@ -56,31 +56,31 @@
       "id": "zakaria",
       "name": "زكريا العويسي",
       "role": { "ar": "شريك مؤسس / CEO", "en": "Co-founder / CEO" },
-      "photo": "https://dummyimage.com/600x600/111/fff&text=Zakaria"
+      "photo": "/team/zakaria.jpg"
     },
     {
       "id": "alwarith",
       "name": "الوارث المعمري",
       "role": { "ar": "شريك مؤسس", "en": "Co-founder" },
-      "photo": "https://dummyimage.com/600x600/111/fff&text=Alwarith"
+      "photo": "/team/alwarith.jpg"
     },
     {
       "id": "khalid",
       "name": "خالد الرواحي",
       "role": { "ar": "شريك مؤسس", "en": "Co-founder" },
-      "photo": "https://dummyimage.com/600x600/111/fff&text=Khalid"
+      "photo": "/team/khalid.jpg"
     },
     {
       "id": "hamza",
       "name": "حمزة الغافري",
       "role": { "ar": "مدير تصوير (DOP)", "en": "Director of Photography (DOP)" },
-      "photo": "https://dummyimage.com/600x600/111/fff&text=Hamza"
+      "photo": "/team/hamza.jpg"
     },
     {
       "id": "hood",
       "name": "هود العبري",
       "role": { "ar": "مصور فوتوغرافي", "en": "Photographer" },
-      "photo": "https://dummyimage.com/600x600/111/fff&text=Hood"
+      "photo": "/team/hood.jpg"
     }
   ]
 }
