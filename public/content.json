@@ -2,55 +2,85 @@
   "accent": "#00E5A6",
   "langDefault": "ar",
   "siteType": "company",
+
   "company": {
     "name": "Altarkiz Production",
     "tagline_ar": "شركة إنتاج محتوى بصري",
     "tagline_en": "Visual Content Production Studio",
-    "about_ar": "نقدم إنتاج أفلام وتصوير فوتوغرافي للجهات والأفراد...",
-    "about_en": "We produce films and photography for brands and institutions..."
+    "about_ar": "نقدّم إنتاج أفلام وتصوير فوتوغرافي للأفراد والجهات مع تركيز على القصص الإنسانية، الرياضة والثقافة.",
+    "about_en": "We produce films and photography for individuals and institutions, focusing on human, sport and cultural stories."
   },
+
   "hero": { "source": "youtube", "youtubeId": "ZrjQqsffbx0", "overlay": 0.45 },
+
   "profile": {
     "name": "Altarkiz Production",
     "title": "Visual Content Studio",
     "email": "hello@altarkiz.example",
-    "bio_ar": "سطر تعريفي مختصر...",
-    "bio_en": "Short English bio...",
+    "bio_ar": "شركة عمانية رائدة في إنتاج المحتوى البصري.",
+    "bio_en": "Omani leading company in visual content production.",
     "socials": {
-      "instagram": "https://instagram.com/altarkiz.pro",
+      "instagram": "https://instagram.com/YourAccount",
       "youtube": "https://youtube.com/@YourChannel"
     }
   },
+
   "projects": [
     {
       "id": "proj-1",
-      "title": { "ar": "عنوان مشروع", "en": "Project Title" },
-      "client": "اسم العميل",
+      "title": { "ar": "مشروع تجريبي", "en": "Sample Project" },
+      "client": "عميل تجريبي",
       "year": "2025",
       "type": "video",
-      "cover": "/covers/p1.jpg",
-      "description": { "ar": "وصف مختصر...", "en": "Short desc..." },
-      "media": { "type": "youtube", "id": "VIDEO_ID" }
+      "cover": "https://dummyimage.com/800x450/111/fff&text=Project+Cover",
+      "description": { "ar": "وصف مختصر للمشروع.", "en": "Short description of the project." },
+      "media": { "type": "youtube", "id": "dQw4w9WgXcQ" }
     }
   ],
+
   "clients": [
-    { "name": "MCY", "logo": "/clients/MCY.png" },
-    { "name": "OCEC", "logo": "/clients/OCEC.svg" },
-    { "name": "WORK", "logo": "/clients/WORK.svg" }
+    { "name": "MCY", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=MCY" },
+    { "name": "OCEC", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=OCEC" },
+    { "name": "WORK", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=WORK" },
+    { "name": "CLIENT4", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C4" },
+    { "name": "CLIENT5", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C5" },
+    { "name": "CLIENT6", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C6" },
+    { "name": "CLIENT7", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C7" },
+    { "name": "CLIENT8", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C8" },
+    { "name": "CLIENT9", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C9" },
+    { "name": "CLIENT10", "logo": "https://dummyimage.com/200x80/00E5A6/fff&text=C10" }
   ],
+
   "team": [
     {
-      "id": "alwarith",
-      "name": "Alwarith Almamari",
-      "role": { "ar": "المدير التنفيذي / مخرج", "en": "CEO / Director" },
-      "photo": "/team/alwarith.jpg",
-      "bio": { "ar": "نبذة قصيرة عن الخبرة...", "en": "Short bio..." }
+      "id": "zakaria",
+      "name": "زكريا العويسي",
+      "role": { "ar": "شريك مؤسس / CEO", "en": "Co-founder / CEO" },
+      "photo": "https://dummyimage.com/600x600/111/fff&text=Zakaria"
     },
     {
-      "id": "sara",
-      "name": "Sara A.",
-      "role": { "ar": "منتج", "en": "Producer" },
-      "photo": "/team/sara.jpg"
+      "id": "alwarith",
+      "name": "الوارث المعمري",
+      "role": { "ar": "شريك مؤسس", "en": "Co-founder" },
+      "photo": "https://dummyimage.com/600x600/111/fff&text=Alwarith"
+    },
+    {
+      "id": "khalid",
+      "name": "خالد الرواحي",
+      "role": { "ar": "شريك مؤسس", "en": "Co-founder" },
+      "photo": "https://dummyimage.com/600x600/111/fff&text=Khalid"
+    },
+    {
+      "id": "hamza",
+      "name": "حمزة الغافري",
+      "role": { "ar": "مدير تصوير (DOP)", "en": "Director of Photography (DOP)" },
+      "photo": "https://dummyimage.com/600x600/111/fff&text=Hamza"
+    },
+    {
+      "id": "hood",
+      "name": "هود العبري",
+      "role": { "ar": "مصور فوتوغرافي", "en": "Photographer" },
+      "photo": "https://dummyimage.com/600x600/111/fff&text=Hood"
     }
   ]
 }
