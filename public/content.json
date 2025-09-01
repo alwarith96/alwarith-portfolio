@@ -35,7 +35,7 @@
   ],
   "clients": [
     { "name": "UTAS", "logo": "/clients/ocec.png" },
-    { "name": "OCEC", "logo": "/clients/ocec.png" }
+    { "name": "OCEC", "logo": "/clients/OCEC.svg" }
   ],
   "team": [
     {
