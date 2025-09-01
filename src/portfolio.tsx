@@ -275,33 +275,34 @@ export default function Portfolio() {
         .section{ padding:56px 0; }
         .title{ font-size:28px; font-weight:700; margin:0 0 16px; }
         dialog[open]{ border:none; border-radius:16px; background:#0a0a0a; color:#f4f4f4; width:min(900px, 92vw); }
-        .logos-horizontal {
-  width: 100%;
+       .logos-marquee {
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 .logos-track {
-  display: flex;
-  gap: 48px;
-  animation: scrollLeft 20s linear infinite;
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+.logos-marquee:hover .logos-track {
+  animation-play-state: paused; /* ✨ توقف عند hover */
 }
 .logo-item {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  padding: 0 40px; /* المسافة بين الشعارات */
 }
 .logo-item img {
   max-height: 52px;
-  opacity: .85;
+  opacity: 0.85;
   filter: grayscale(30%);
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 .logo-item img:hover {
   opacity: 1;
   filter: none;
 }
-@keyframes scrollLeft {
+@keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
@@ -404,23 +405,29 @@ export default function Portfolio() {
           </div>
         </section>
 
-      {/* CLIENT LOGOS (Horizontal Scroll) */}
+{/* CLIENT LOGOS (Infinite Marquee) */}
 <section id="clients" className="section" style={{ paddingTop: 24 }}>
   <div className="max">
     <h2 className="title" style={{ textAlign: "center", marginBottom: 24 }}>
       {dict.clients.title}
     </h2>
-    <div className="logos-horizontal">
+    <div className="logos-marquee">
       <div className="logos-track">
-        {clients.concat(clients).map((c, i) => (
-          <div key={c.name + i} className="logo-item">
+        {clients.map((c, i) => (
+          <span key={c.name + i} className="logo-item">
             <img src={c.logo} alt={c.name} />
-          </div>
+          </span>
+        ))}
+        {clients.map((c, i) => (
+          <span key={c.name + "dup" + i} className="logo-item">
+            <img src={c.logo} alt={c.name} />
+          </span>
         ))}
       </div>
     </div>
   </div>
 </section>
+
 
 
         {/* TEAM / MANAGEMENT */}
