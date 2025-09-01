@@ -372,19 +372,24 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* CLIENT LOGOS */}
-        <section id="clients" className="section" style={{ paddingTop: 24 }}>
-          <div className="max">
-            <h2 className="title" style={{ textAlign: "center", marginBottom: 24 }}>
-              {dict.clients.title}
-            </h2>
-            <div className="logos">
-              {clients.map((c) => (
-                <img key={c.name} src={c.logo} alt={c.name} />
-              ))}
-            </div>
+      {/* CLIENT LOGOS (Horizontal Scroll) */}
+<section id="clients" className="section" style={{ paddingTop: 24 }}>
+  <div className="max">
+    <h2 className="title" style={{ textAlign: "center", marginBottom: 24 }}>
+      {dict.clients.title}
+    </h2>
+    <div className="logos-horizontal">
+      <div className="logos-track">
+        {clients.concat(clients).map((c, i) => (
+          <div key={c.name + i} className="logo-item">
+            <img src={c.logo} alt={c.name} />
           </div>
-        </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* TEAM / MANAGEMENT */}
         <section id="team" className="section">
