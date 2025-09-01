@@ -275,7 +275,39 @@ export default function Portfolio() {
         .section{ padding:56px 0; }
         .title{ font-size:28px; font-weight:700; margin:0 0 16px; }
         dialog[open]{ border:none; border-radius:16px; background:#0a0a0a; color:#f4f4f4; width:min(900px, 92vw); }
-      `}</style>
+        .logos-horizontal {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.logos-track {
+  display: flex;
+  gap: 48px;
+  animation: scrollLeft 20s linear infinite;
+}
+.logo-item {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-item img {
+  max-height: 52px;
+  opacity: .85;
+  filter: grayscale(30%);
+  transition: opacity .3s;
+}
+.logo-item img:hover {
+  opacity: 1;
+  filter: none;
+}
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+      `
+      }</style>
 
       <div className="wrap">
         {/* NAV */}
