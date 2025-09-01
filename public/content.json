@@ -35,7 +35,8 @@
   ],
   "clients": [
     { "name": "MCY", "logo": "/clients/MCY.png" },
-    { "name": "OCEC", "logo": "/clients/OCEC.svg" }
+    { "name": "OCEC", "logo": "/clients/OCEC.svg" },
+    { "name": "WORK", "logo": "/clients/WORK.svg" }
   ],
   "team": [
     {
