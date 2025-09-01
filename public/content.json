@@ -17,7 +17,7 @@
     "bio_ar": "سطر تعريفي مختصر...",
     "bio_en": "Short English bio...",
     "socials": {
-      "instagram": "https://instagram.com/YourAccount",
+      "instagram": "https://instagram.com/altarkiz.pro",
       "youtube": "https://youtube.com/@YourChannel"
     }
   },
@@ -34,7 +34,7 @@
     }
   ],
   "clients": [
-    { "name": "UTAS", "logo": "/clients/utas.png" },
+    { "name": "UTAS", "logo": "/clients/ocec.png" },
     { "name": "OCEC", "logo": "/clients/ocec.png" }
   ],
   "team": [
